@@ -78,6 +78,10 @@
         "symfony/polyfill-php56": "*"
     },
     "scripts": {
+        "prepare": [
+            "php bin/console doctrine:database:drop --if-exists -f",
+            "php bin/console doctrine:database:create"
+        ],
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
