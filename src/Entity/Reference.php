@@ -47,6 +47,7 @@ class Reference
 
     /**
      * @var Collection
+     * @ORM\OneToMany(targetEntity="Media", mappedBy="reference", cascade={"persist"}, orphanRemoval=true)
      */
     private $medias;
 
@@ -126,5 +127,27 @@ class Reference
     public function getMedias(): Collection
     {
         return $this->medias;
-    } //31:30
+    }
+
+    /**
+     * @param Media $media
+     */
+    public function addMedia(Media $media): void
+    {
+        if(!$this->medias->contains($media)) {
+            $media->setReference($this);
+            $this->medias->add($media);
+        }
+    }
+
+    /**
+     * @param Media $media
+     */
+    public function removeMedia(Media $media): void
+    {
+        if($this->medias->contains($media)) {
+            $media->setReference(null);
+            $this->medias->removeElement($media);
+        }
+    }
 }
