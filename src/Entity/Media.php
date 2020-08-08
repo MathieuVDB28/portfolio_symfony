@@ -5,10 +5,12 @@ namespace App\Entity;
 use App\Repository\MediaRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=MediaRepository::class)
+ * @ORM\EntityListeners({"App\EntityListener\MediaListener"})
  */
 class Media
 {
@@ -16,6 +18,7 @@ class Media
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"get"})
      */
     private $id = null;
 
@@ -27,6 +30,7 @@ class Media
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"get"})
      */
     private $path = null;
 

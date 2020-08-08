@@ -2,74 +2,88 @@
 
 namespace App\Entity;
 
-use App\Repository\FormationRepository;
-use Doctrine\ORM\Mapping as ORM;
 use DateTimeInterface;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\FormationRepository", repositoryClass=FormationRepository::class)
+ * Class Formation
+ * @package App\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\FormationRepository")
  */
 class Formation
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @var int|null
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private $id = null;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Ce message ne peut pas être vide.")
+     * @var string|null
+     * @ORM\Column
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $name = null;
 
     /**
      * @var string|null
      * @ORM\Column
-     * @Assert\NotBlank(message="Ce message ne peut pas être vide.")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $school = null;
 
     /**
+     * @var int|null
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="Ce message ne peut pas être vide.")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $gradeLevel = null;
 
     /**
+     * @var string|null
      * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="Ce message ne peut pas être vide.")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $description = null;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
-     * @Assert\NotBlank(message="Ce message ne peut pas être vide.")
+     * @var DateTimeInterface|null
+     * @ORM\Column(type="date_immutable")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $startedAt = null;
 
     /**
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @var DateTimeInterface|null
+     * @ORM\Column(type="date_immutable", nullable=true)
      */
-    private $endedAt = null;
+    private  $endedAt = null;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    /**
+     * @param string|null $name
+     */
+    public function setName(?string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -88,51 +102,67 @@ class Formation
         $this->school = $school;
     }
 
+    /**
+     * @return int|null
+     */
     public function getGradeLevel(): ?int
     {
         return $this->gradeLevel;
     }
 
-    public function setGradeLevel(int $gradeLevel): self
+    /**
+     * @param int|null $gradeLevel
+     */
+    public function setGradeLevel(?int $gradeLevel): void
     {
         $this->gradeLevel = $gradeLevel;
-
-        return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    /**
+     * @param string|null $description
+     */
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
-
-        return $this;
     }
 
-    public function getStartedAt(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getStartedAt(): ?DateTimeInterface
     {
         return $this->startedAt;
     }
 
-    public function setStartedAt(\DateTimeInterface $startedAt): self
+    /**
+     * @param DateTimeInterface|null $startedAt
+     */
+    public function setStartedAt(?DateTimeInterface $startedAt): void
     {
         $this->startedAt = $startedAt;
-
-        return $this;
     }
 
-    public function getEndedAt(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getEndedAt(): ?DateTimeInterface
     {
         return $this->endedAt;
     }
 
-    public function setEndedAt(\DateTimeInterface $endedAt): self
+    /**
+     * @param DateTimeInterface|null $endedAt
+     */
+    public function setEndedAt(?DateTimeInterface $endedAt): void
     {
         $this->endedAt = $endedAt;
-
-        return $this;
     }
 }

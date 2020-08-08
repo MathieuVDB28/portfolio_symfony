@@ -60,11 +60,11 @@ class ReferenceController extends AbstractController
 
     /**
      * @Route("/{id}/update", name="references_update")
-     * @param reference $reference
+     * @param Reference $reference
      * @param Request $request
      * @return Response
      */
-    public function update(reference $reference, Request $request): Response
+    public function update(Reference $reference, Request $request): Response
     {
         $form = $this->createForm(ReferenceType::class, $reference)->handleRequest($request);
 
@@ -72,7 +72,7 @@ class ReferenceController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash("success", "Votre référence à été modifiée !");
 
-            return $this->redirectToRoute("reference_manage");
+            return $this->redirectToRoute("references_manage");
         }
 
         return $this->render("back_office/reference/update.html.twig", [
@@ -82,15 +82,15 @@ class ReferenceController extends AbstractController
 
     /**
      * @Route("/{id}/delete", name="references_delete")
-     * @param reference $reference
+     * @param Reference $reference
      * @return RedirectResponse
      */
-    public function delete(reference $reference): RedirectResponse
+    public function delete(Reference $reference): RedirectResponse
     {
         $this->getDoctrine()->getManager()->remove($reference);
         $this->getDoctrine()->getManager()->flush();
         $this->addFlash("success", "Votre référence à été supprimée !");
 
-        return $this->redirectToRoute("reference_manage");
+        return $this->redirectToRoute("references_manage");
     }
 }
